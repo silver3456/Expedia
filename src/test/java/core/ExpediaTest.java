@@ -16,7 +16,8 @@ public class ExpediaTest {
     private WebDriver driver;
     private String city = "New York, NY";
     private String checkIn = " 12/22/2018";
-    private String checkOut = " 12/27/2018";
+    private String checkOut = " 12/25/2018";
+
     String numOfGuests = "3";
 
 
@@ -27,9 +28,12 @@ public class ExpediaTest {
         driver.findElement(By.xpath("//*[@id='tab-hotel-tab-hp']")).click();
         driver.findElement(By.xpath("//*[@id='hotel-destination-hp-hotel']")).clear();
         driver.findElement(By.xpath("//*[@id='hotel-destination-hp-hotel']")).sendKeys(city);
+        driver.findElement(By.xpath("//*[@id='hotel-checkin-hp-hotel']")).clear();
         driver.findElement(By.xpath("//*[@id='hotel-checkin-hp-hotel']")).sendKeys(checkIn);
+        driver.findElement(By.xpath("//*[@id='hotel-checkout-hp-hotel']")).clear();
         driver.findElement(By.xpath("//*[@id='hotel-checkout-hp-hotel']")).sendKeys(checkOut);
-
+//        driver.findElement(By.xpath("//*[@id=\"hotel-checkout-hp-hotel\"]")).clear();
+//        driver.findElement(By.xpath("//*[@id=\"hotel-checkout-hp-hotel\"]")).sendKeys(checkOut);
         //Getting an error message : Element should have been “select” but was “div” getting an error in selenium
         //(This exception generally occurs when we use Select command to select dropdowns which are not built by using "select" tag.)
         //new Select(driver.findElement(By.xpath("//*[@id=\"traveler-selector-hp-hotel\"]"))).selectByValue(numOfGuests);
@@ -40,12 +44,17 @@ public class ExpediaTest {
         for (int i = 0; i < 2; i++) {
             driver.findElement(By.xpath("//*[@id=\"traveler-selector-hp-hotel\"]/div/ul/li/div/div/div[1]/div[2]/div[4]/button/span[1]")).click();
             Thread.sleep(3000);
-
         }
 
-        driver.findElement(By.xpath("//*[@id=\"gcw-hotel-form-hp-hotel\"]")).click();
+        driver.findElement(By.xpath("//*[@id=\"gcw-hotel-form-hp-hotel\"]/div[10]/label/button")).click();
+
+        //Print the name of the city
+
+        String actualCity = driver.findElement(By.xpath("//h1[@class = 'section-header-main']")).getText();
+        System.out.println("CITY: " + actualCity);
 
         //2.Modify the search results page, give criteria
+        driver.findElement(By.xpath("//input[@id = 'star4']")).click();
 
 
         //3.Analyze the results and make your selection
@@ -68,12 +77,13 @@ public class ExpediaTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("https://www.expedia.com/");
+        driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
 
     }
 
     @AfterMethod
     public void tearDown() {
-        driver.quit();
+        // driver.quit();
 
     }
 
