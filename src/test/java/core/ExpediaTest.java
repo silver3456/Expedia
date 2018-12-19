@@ -83,7 +83,7 @@ public class ExpediaTest {
 
     @AfterMethod
     public void tearDown() {
-        // driver.quit();
+         driver.quit();
 
     }
 
