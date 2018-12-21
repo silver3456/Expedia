@@ -9,6 +9,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 public class ExpediaTest {
@@ -17,6 +18,8 @@ public class ExpediaTest {
     private String city = "New York, NY";
     private String checkIn = " 12/22/2018";
     private String checkOut = " 12/25/2018";
+    private String starRating = "star4";
+
 
     String numOfGuests = "3";
 
@@ -43,21 +46,33 @@ public class ExpediaTest {
         //click plus button several times
         for (int i = 0; i < 2; i++) {
             driver.findElement(By.xpath("//*[@id=\"traveler-selector-hp-hotel\"]/div/ul/li/div/div/div[1]/div[2]/div[4]/button/span[1]")).click();
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         }
 
         driver.findElement(By.xpath("//*[@id=\"gcw-hotel-form-hp-hotel\"]/div[10]/label/button")).click();
 
         //Print the name of the city
 
-        String actualCity = driver.findElement(By.xpath("//h1[@class = 'section-header-main']")).getText();
-        System.out.println("CITY: " + actualCity);
+        Thread.sleep(2000);
+
+
+        try {
+            String actualCity = driver.findElement(By.xpath("//h1[@class = 'section-header-main']")).getText();
+            System.out.println("CITY: " + actualCity);
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+            System.out.println("City element is not found");
+        }
+
 
         //2.Modify the search results page, give criteria
-        driver.findElement(By.xpath("//input[@id = 'star4']")).click();
+        driver.findElement(By.xpath("//input[@id = '" + starRating + "']")).click();
+        Thread.sleep(2000);
 
 
         //3.Analyze the results and make your selection
+        driver.findElement(By.xpath("//*[@id=\"resultsContainer\"]/section/article[2]/div[2]/div/a")).click();
+        //driver.findElement(By.xpath("//*[@id='resultsContainer']/section/article[2]/div[2]/div/a")).click();
 
 
         //4.Book reservation
@@ -83,7 +98,7 @@ public class ExpediaTest {
 
     @AfterMethod
     public void tearDown() {
-         driver.quit();
+        //driver.quit();
 
     }
 
