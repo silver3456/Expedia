@@ -5,10 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
@@ -74,6 +76,16 @@ public class ExpediaTest {
         driver.findElement(By.xpath("//*[@id=\"resultsContainer\"]/section/article[2]/div[2]/div/a")).click();
         //driver.findElement(By.xpath("//*[@id='resultsContainer']/section/article[2]/div[2]/div/a")).click();
 
+
+        //Switch the window to the pop up
+        ArrayList<String>windows= new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(windows.get(1));
+
+
+        //Print hotel name and star rating
+        String hotelName = driver.findElement(By.xpath("//*[@id = 'hotel-name']")).getText();
+        System.out.println(hotelName);
+        Assert.assertEquals("6 Columbus - a SIXTY Hotel", hotelName);
 
         //4.Book reservation
 
