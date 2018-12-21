@@ -18,12 +18,10 @@ public class ExpediaTest {
 
     private WebDriver driver;
     private String city = "New York, NY";
-    private String checkIn = " 12/22/2018";
-    private String checkOut = " 12/25/2018";
+    private String checkIn = " 12/27/2018";
+    private String checkOut = " 12/30/2018";
     private String starRating = "star4";
-
-
-    String numOfGuests = "3";
+    private String numOfGuests = "4";
 
 
     @Test
@@ -33,9 +31,9 @@ public class ExpediaTest {
         driver.findElement(By.xpath("//*[@id='tab-hotel-tab-hp']")).click();
         driver.findElement(By.xpath("//*[@id='hotel-destination-hp-hotel']")).clear();
         driver.findElement(By.xpath("//*[@id='hotel-destination-hp-hotel']")).sendKeys(city);
-        driver.findElement(By.xpath("//*[@id='hotel-checkin-hp-hotel']")).clear();
+        //driver.findElement(By.xpath("//*[@id='hotel-checkin-hp-hotel']")).clear();
         driver.findElement(By.xpath("//*[@id='hotel-checkin-hp-hotel']")).sendKeys(checkIn);
-        driver.findElement(By.xpath("//*[@id='hotel-checkout-hp-hotel']")).clear();
+       // driver.findElement(By.xpath("//*[@id='hotel-checkout-hp-hotel']")).clear();
         driver.findElement(By.xpath("//*[@id='hotel-checkout-hp-hotel']")).sendKeys(checkOut);
 //        driver.findElement(By.xpath("//*[@id=\"hotel-checkout-hp-hotel\"]")).clear();
 //        driver.findElement(By.xpath("//*[@id=\"hotel-checkout-hp-hotel\"]")).sendKeys(checkOut);
@@ -88,12 +86,20 @@ public class ExpediaTest {
         Assert.assertEquals("6 Columbus - a SIXTY Hotel", hotelName);
 
         //4.Book reservation
+        driver.findElement(By.xpath("//*[@id='mock-book-button']")).click();
+
+        Thread.sleep(2000);
+        //String hotelPrice = driver.findElement(By.xpath("//*[@class='summary-total amount-value']")).getText();
+        String hotelPrice = driver.findElement(By.xpath("//*[@id=\"trip-summary\"]/div[2]/div[4]/div/span[2]")).getText();
+        System.out.println("PRICE: " + hotelPrice);
 
 
         //5.Fill out contact/billing
 
 
         //6.Get confirmation
+        String pageTitle = driver.getTitle();
+        Assert.assertTrue(pageTitle.contains("Payment"));
 
     }
 
@@ -106,11 +112,14 @@ public class ExpediaTest {
         driver.get("https://www.expedia.com/");
         driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
 
+        String browserVersion = options.getVersion().toString();
+        System.out.println("VERSION: " + browserVersion);
+
     }
 
     @AfterMethod
     public void tearDown() {
-        //driver.quit();
+        driver.quit();
 
     }
 
