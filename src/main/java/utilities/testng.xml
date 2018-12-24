@@ -1,9 +1,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Expedia Test Suit" verbose="1">
-    <test name="All tests">
+    <test name="Smoke test: Home Page">
         <classes>
             <class name="smoketests.ButtonTagsTest"/>
+        </classes>
+    </test>
+
+    <test name="Smoke test: Login Page">
+        <classes>
+
             <class name="smoketests.LoginPresentTestNG"/>
         </classes>
     </test>
