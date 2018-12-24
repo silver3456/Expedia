@@ -105,15 +105,10 @@ public class ExpediaTest {
 
     @BeforeMethod
     public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-fullscreen");
         driver = utilities.DriverFactory.open("chrome");
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("https://www.expedia.com/");
-        driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
 
-        String browserVersion = options.getVersion();
-        System.out.println("VERSION: " + browserVersion);
 
     }
 
