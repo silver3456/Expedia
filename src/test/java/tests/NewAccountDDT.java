@@ -20,22 +20,16 @@ public class NewAccountDDT {
 
     private WebDriver driver;
 
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String password;
+    private String firstName, lastName, email, password;
+    private WebElement firstNameElement, lastNameElement, emailElement, passwordElement, signUpButtonElement;
+
 
     @Test
     public void newAccountTest() {
         System.out.println("NEW RECORD: " + firstName + " " + lastName + " " + email + " " + password);
 
 
-        //Define web elements
-        WebElement firstNameElement = driver.findElement(By.xpath("//*[@id='gss-signup-first-name']"));
-        WebElement lastNameElement = driver.findElement(By.xpath("//*[@id='gss-signup-last-name']"));
-        WebElement emailElement = driver.findElement(By.xpath("//*[@id ='gss-signup-email']"));
-        WebElement passwordElement = driver.findElement(By.xpath("//*[@id='gss-signup-password']"));
-        WebElement signUpButtonElement = driver.findElement(By.xpath("//*[@id='gss-signup-submit']"));
+        defineWebElements();
 
 
         //Fill out the form
@@ -79,6 +73,15 @@ public class NewAccountDDT {
     @After
     public void tearDown() {
         driver.quit();
+
+    }
+
+    public void defineWebElements() {
+        firstNameElement = driver.findElement(By.xpath("//*[@id='gss-signup-first-name']"));
+        lastNameElement = driver.findElement(By.xpath("//*[@id='gss-signup-last-name']"));
+        emailElement = driver.findElement(By.xpath("//*[@id ='gss-signup-email']"));
+        passwordElement = driver.findElement(By.xpath("//*[@id='gss-signup-password']"));
+        signUpButtonElement = driver.findElement(By.xpath("//*[@id='gss-signup-submit']"));
 
     }
 }
