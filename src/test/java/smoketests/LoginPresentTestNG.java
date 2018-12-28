@@ -22,7 +22,7 @@ public class LoginPresentTestNG extends MyListener {
         //Click Account and Sign in to get a login form
 
         driver.findElement(By.xpath("//button[@id='header-account-menu']")).click();
-        driver.findElement(By.xpath("//a[@id='account-signin']")).click();
+        driver.findElement(By.xpath("//_a[@id='account-signin']")).click();
 
         boolean loginEmailBox = driver.findElement(By.xpath(".//*[@id = 'gss-signin-email']")).isDisplayed();
         boolean passwordBox = driver.findElement(By.xpath(".//*[@id = 'gss-signin-password']")).isDisplayed();
@@ -36,8 +36,8 @@ public class LoginPresentTestNG extends MyListener {
         System.out.println("Starting test");
         String webUrl = "https://www.expedia.com/";
 
-        driver = new EventFiringWebDriver(new ChromeDriver());
-        driver.register(new MyListener());
+        driver = new EventFiringWebDriver(new ChromeDriver()); // pass initialized driver to EventFiringWebDriver
+        driver.register(new MyListener()); // register Listener
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get(webUrl);
     }
