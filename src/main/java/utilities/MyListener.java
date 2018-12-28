@@ -26,8 +26,12 @@ public class MyListener extends AbstractWebDriverEventListener {
         //cast driver to TakeScreenshot type
         File tmp = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
-        //File will be created in the current directory
-        File screen = new File("screen-" + System.currentTimeMillis() + ".png");
+        //File will be created in the following directory
+        File screen = new File("/Users/alexander/SDET_Files/Reporting", "screen-" + System.currentTimeMillis() + ".png");
+
+
+        // File will be created in the current project
+       // File screen = new File("screen-" + System.currentTimeMillis() + ".png");
 
         try {
             Files.copy(tmp, screen); //Class Files is in Guava Library
