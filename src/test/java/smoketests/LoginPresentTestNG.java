@@ -2,16 +2,19 @@ package smoketests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import utilities.MyListener;
 
 import java.util.concurrent.TimeUnit;
 
-public class LoginPresentTestNG {
+public class LoginPresentTestNG extends MyListener {
 
-    WebDriver driver;
+    private EventFiringWebDriver driver;
 
     @Test
     public void loginElementsPresentTest() {
@@ -33,7 +36,8 @@ public class LoginPresentTestNG {
         System.out.println("Starting test");
         String webUrl = "https://www.expedia.com/";
 
-        driver = utilities.DriverFactory.open("chrome");
+        driver = new EventFiringWebDriver(new ChromeDriver());
+        driver.register(new MyListener());
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get(webUrl);
     }
