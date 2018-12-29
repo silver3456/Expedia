@@ -2,6 +2,7 @@ package smoketests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Assert;
@@ -15,14 +16,17 @@ import java.util.concurrent.TimeUnit;
 public class LoginPresentTestNG extends MyListener {
 
     private EventFiringWebDriver driver;
+    private WebElement accountElement, signInElement;
 
     @Test
     public void loginElementsPresentTest() {
         System.out.println("Running test");
         //Click Account and Sign in to get a login form
 
-        driver.findElement(By.xpath("//button[@id='header-account-menu']")).click();
-        driver.findElement(By.xpath("//_a[@id='account-signin']")).click();
+        defineWebElements();
+
+        accountElement.click();
+        signInElement.click();
 
         boolean loginEmailBox = driver.findElement(By.xpath(".//*[@id = 'gss-signin-email']")).isDisplayed();
         boolean passwordBox = driver.findElement(By.xpath(".//*[@id = 'gss-signin-password']")).isDisplayed();
@@ -47,5 +51,11 @@ public class LoginPresentTestNG extends MyListener {
     public void tearDown() {
         System.out.println("Closing test");
         driver.quit();
+    }
+
+    public void defineWebElements() {
+        accountElement = driver.findElement(By.xpath("//button[@id='header-account-menu']"));
+        signInElement = driver.findElement(By.xpath("//a[@id='account-signin']"));
+
     }
 }

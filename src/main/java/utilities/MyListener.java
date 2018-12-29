@@ -23,6 +23,7 @@ public class MyListener extends AbstractWebDriverEventListener {
     public void onException(Throwable throwable, WebDriver driver) {
         System.out.println(throwable);
 
+
         //cast driver to TakeScreenshot type
         File tmp = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
@@ -40,4 +41,7 @@ public class MyListener extends AbstractWebDriverEventListener {
         }
         System.out.println(screen);
     }
+
+
+
 }
