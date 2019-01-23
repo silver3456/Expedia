@@ -10,6 +10,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -19,6 +20,7 @@ public class WindowsNavigateTest {
     public WebDriverWait wait;
     private String mainLink;
     private String newLink;
+
 
     @Test
     public void navigateToWindowTest() {
@@ -56,7 +58,7 @@ public class WindowsNavigateTest {
     @BeforeMethod
     public void setUp() {
         initLinks();
-        driver = new ChromeDriver(); // pass initialized driver to EventFiringWebDriver
+        driver = utilities.DriverFactory.open("Chrome"); // pass initialized driver to EventFiringWebDriver
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get(mainLink);
 
