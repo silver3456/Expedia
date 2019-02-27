@@ -5,25 +5,26 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-public class BrowserStackTest {
+public class BrowserStackTestDataProvider {
 
     public static final String USERNAME = "aleksandrserof1";
     public static final String ACCESSKEY = "qZpBLEb9xfc3XpbMqp6a";
-    public static final String URL = "http://"+USERNAME+":"+ ACCESSKEY+ "@hub-cloud.browserstack.com/wd/hub";
+    public static final String URL = "http://" + USERNAME + ":" + ACCESSKEY + "@hub-cloud.browserstack.com/wd/hub";
 
-    @Test
-    public void openSTM() throws MalformedURLException {
+    @Test(dataProvider = "browserStackTestData")
+    public void openSTM(Platform platform, String browserName, String versionName) throws MalformedURLException {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setPlatform(Platform.MAC);
-        capabilities.setBrowserName("firefox");
-        capabilities.setVersion("57");
+        capabilities.setPlatform(platform);
+        capabilities.setBrowserName(browserName);
+        capabilities.setVersion(versionName);
         capabilities.setCapability("browserstack.debug", true);
 
 
@@ -38,6 +39,15 @@ public class BrowserStackTest {
         Assert.assertEquals(actualUrl, expectedURL, "URLs are not the same");
 
         driver.quit();
+    }
 
+    @DataProvider(name = "browserStackTestData", parallel = true)
+    public Object[][] getData() {
+        Object[][] testData = new Object[][]{
+                {Platform.MAC, "chrome", "62.0"},
+                {Platform.WIN8, "chrome", "62.0"},
+                {Platform.WINDOWS, "firefox", "57"}
+        };
+        return testData;
     }
 }
