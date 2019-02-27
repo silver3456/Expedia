@@ -23,10 +23,10 @@ public class GettingLogs {
         System.out.println(driver.manage().logs().getAvailableLogTypes());
 
         //Get browser's logs
-       // driver.manage().logs().get("browser").forEach(l-> System.out.println(l));
+        driver.manage().logs().get("browser").forEach(l-> System.out.println(l));
 
         //Get performance logs
-        driver.manage().logs().get("performance").forEach(l-> System.out.println(l));
+       // driver.manage().logs().get("performance").forEach(l-> System.out.println(l));
     }
 
 
