@@ -2,8 +2,10 @@ package browser_stack;
 
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -29,6 +31,9 @@ public class BrowserStackTest {
 
         URL browserStackURL = new URL(URL);
         WebDriver driver = new RemoteWebDriver(browserStackURL, capabilities);
+
+
+
 
         driver.get("https://www.expedia.com");
         driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);

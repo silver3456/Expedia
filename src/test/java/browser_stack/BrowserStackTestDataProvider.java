@@ -5,6 +5,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -34,16 +35,24 @@ public class BrowserStackTestDataProvider {
         capabilities.setCapability("browserstack.debug", true);
 
 
+
         URL browserStackURL = new URL(URL);
         WebDriver driver = new RemoteWebDriver(browserStackURL, capabilities);
 
+//        Actions actions = new Actions(driver);
+//        actions.
+
+
         driver.get("https://www.expedia.com");
         driver.manage().timeouts().implicitlyWait(12, TimeUnit.SECONDS);
+
+
 
         //Take screenshots
         driver = new Augmenter().augment(driver);
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(srcFile, new File ("/Users/alexander/SDET_Files/screenshots/screenshot.png"));
+
 
 
         String actualUrl = driver.getCurrentUrl();
