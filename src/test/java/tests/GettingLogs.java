@@ -23,15 +23,16 @@ public class GettingLogs {
         System.out.println(driver.manage().logs().getAvailableLogTypes());
 
         //Get browser's logs
-        driver.manage().logs().get("browser").forEach(l-> System.out.println(l));
+       // driver.manage().logs().get("browser").forEach(l-> System.out.println(l));
 
         //Get performance logs
-       // driver.manage().logs().get("performance").forEach(l-> System.out.println(l));
+        driver.manage().logs().get("performance").forEach(l-> System.out.println(l));
     }
 
 
     @BeforeMethod
     public void setUp() {
+        System.setProperty("webdriver.chrome.driver", "/Users/alexander/workspace/Java_Yaroslavl/target/classes/webdriver/chromedriver");
         //Enabling performance Log
         DesiredCapabilities cap = DesiredCapabilities.chrome();
         LoggingPreferences logPrefs = new LoggingPreferences();
